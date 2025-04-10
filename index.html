@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+</head>
+<body>
+  <script>
+    let video;
+    let poseNet;
+    let poses = [];
+
+    const socket = new WebSocket('ws://localhost:8080'); // connects to your local Node.js server
+
+    function setup() {
+      createCanvas(640, 480);
+      video = createCapture(VIDEO);
+      video.size(width, height);
+      poseNet = ml5.poseNet(video, modelReady);
+      poseNet.on("pose", function (results) {
+        poses = results;
+        if (poses.length > 0 && socket.readyState === 1) {
+          const nose = poses[0].pose.keypoints.find(p => p.part === 'nose');
+          socket.send(JSON.stringify({ noseX: nose.position.x, noseY: nose.position.y }));
+        }
+      });
+      video.hide();
+    }
+
+    function modelReady() {
+      console.log("PoseNet model loaded");
+    }
+
+    function draw() {
+      image(video, 0, 0, width, height);
+    }
+  </script>
+</body>
+</html>
