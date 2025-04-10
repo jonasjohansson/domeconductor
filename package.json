@@ -1,0 +1,24 @@
+{
+  "name": "domeconductor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonasjohansson/domeconductor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonasjohansson/domeconductor/issues"
+  },
+  "homepage": "https://github.com/jonasjohansson/domeconductor#readme",
+  "description": "",
+  "dependencies": {
+    "osc": "^2.4.5",
+    "ws": "^8.18.1"
+  }
+}

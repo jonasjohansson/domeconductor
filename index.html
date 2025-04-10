@@ -1,39 +1,89 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
-  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
-</head>
-<body>
-  <script>
-    let video;
-    let poseNet;
-    let poses = [];
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.min.js"></script>
+    <script src="https://unpkg.com/ml5@1.2.1/dist/ml5.min.js"></script>
+  </head>
+  <body>
+    <script>
+      let video;
+      let bodyPose;
+      let poses = [];
+      let connections;
 
-    const socket = new WebSocket('ws://localhost:8080'); // connects to your local Node.js server
+      const socket = new WebSocket("ws://localhost:8080"); // Local Node server for OSC/MIDI relay
 
-    function setup() {
-      createCanvas(640, 480);
-      video = createCapture(VIDEO);
-      video.size(width, height);
-      poseNet = ml5.poseNet(video, modelReady);
-      poseNet.on("pose", function (results) {
-        poses = results;
-        if (poses.length > 0 && socket.readyState === 1) {
-          const nose = poses[0].pose.keypoints.find(p => p.part === 'nose');
-          socket.send(JSON.stringify({ noseX: nose.position.x, noseY: nose.position.y }));
+      function preload() {
+        bodyPose = ml5.bodyPose(); // ✅ Correct new API
+      }
+
+      function setup() {
+        createCanvas(640, 480);
+        video = createCapture(VIDEO);
+        video.size(640, 480);
+        video.hide();
+
+        bodyPose.detectStart(video, gotPoses); // ✅ Real-time pose detection
+        connections = bodyPose.getConnections(); // ✅ Skeleton links
+      }
+
+      function draw() {
+        image(video, 0, 0, width, height);
+
+        for (let i = 0; i < poses.length; i++) {
+          let pose = poses[i];
+
+          // Draw skeleton lines
+          for (let j = 0; j < connections.length; j++) {
+            let [a, b] = connections[j];
+            let pointA = pose.keypoints[a];
+            let pointB = pose.keypoints[b];
+            if (pointA.confidence > 0.1 && pointB.confidence > 0.1) {
+              stroke(255, 0, 0);
+              strokeWeight(2);
+              line(pointA.x, pointA.y, pointB.x, pointB.y);
+            }
+          }
+
+          // Draw joints
+          for (let j = 0; j < pose.keypoints.length; j++) {
+            let keypoint = pose.keypoints[j];
+            if (keypoint.confidence > 0.1) {
+              fill(0, 255, 0);
+              noStroke();
+              circle(keypoint.x, keypoint.y, 10);
+            }
+          }
         }
-      });
-      video.hide();
-    }
+      }
+      function gotPoses(results) {
+        poses = results;
 
-    function modelReady() {
-      console.log("PoseNet model loaded");
-    }
+        if (poses.length > 0) {
+          const pose = poses[0];
 
-    function draw() {
-      image(video, 0, 0, width, height);
-    }
-  </script>
-</body>
+          const leftWrist = pose.keypoints.find((p) => p.name === "left_wrist");
+          const rightWrist = pose.keypoints.find(
+            (p) => p.name === "right_wrist"
+          );
+
+          if (
+            leftWrist &&
+            rightWrist &&
+            leftWrist.confidence > 0.1 &&
+            rightWrist.confidence > 0.1
+          ) {
+            const dx = leftWrist.x - rightWrist.x;
+            const dy = leftWrist.y - rightWrist.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (socket.readyState === 1) {
+              socket.send(JSON.stringify({ handDistance: dist }));
+            }
+          }
+        }
+      }
+    </script>
+  </body>
 </html>
