@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Composition name="Composition" uniqueId="1743691325913" numDecks="3" currentDeckIndex="0" numLayers="3" numColumns="9" compositionIsRelative="0">
+	<versionInfo name="Resolume Arena" majorVersion="7" minorVersion="22" microVersion="4" revision="43686"/>
+	<CompositionInfo name="DOME CONDUCTOR" description="" width="1024" height="1024">
+		<DeckInfo name="Downloads" id="1744281062883" closed="0"/>
+		<DeckInfo name="empty" id="1744281062889" closed="0"/>
+		<DeckInfo name="empty" id="1744281062895" closed="0"/>
+	</CompositionInfo>
+	<Params name="Params">
+		<Param name="Name" T="STRING" default="" value="DOME CONDUCTOR"/>
+		<ParamRange name="Speed" T="DOUBLE" default="1" value="1">
+			<DurationSource name="DurationSource" userDuration="4.9888894086826338636"/>
+			<PhaseSourceTimeline name="PhaseSourceTimeline" phase="0.25" hardSynced="0">
+				<Params name="Params">
+					<ParamRange name="Max Distance" altName="Distance" T="DOUBLE" default="4.9888894086826338636" value="2">
+						<PhaseSourceStatic name="PhaseSourceStatic"/>
+					</ParamRange>
+					<ParamChoice name="PlayDirection" T="INT32" default="2" value="1" storeChoices="0"/>
+					<Param name="DurationIsScalable" altName="Duration Changes With In &amp; Out Points" T="BOOL" default="1" value="0"/>
+				</Params>
+				<Beats_d name="Beats_d" numDetectedBeats="-1" numManualBeats="4" detectedTempo="-1"/>
+			</PhaseSourceTimeline>
+		</ParamRange>
+		<Param name="KeyboardShortcutPreset" T="STRING" default="" value="Default"/>
+		<Param name="MidiShortcutPreset" T="STRING" default="" value="Default"/>
+		<Param name="OscShortcutPreset" T="STRING" default="" value="OutputAllMessages"/>
+		<Param name="DmxShortcutPreset" T="STRING" default="" value="Default"/>
+	</Params>
+	<AnimationSettings name="AnimationSettings" uniqueId="1744349562612">
+		<Setting name="Speed" flags="9223372036854775810"/>
+	</AnimationSettings>
+	<Params name="Dashboard">
+		<ParamRange name="Link 1" T="DOUBLE" default="0.95145833492279052734" value="0">
+			<PhaseSourceStatic name="PhaseSourceStatic"/>
+		</ParamRange>
+		<ParamRange name="Link 2" altName="Low" T="DOUBLE" default="0.70729166269302368164" value="0.70729166269302368164">
+			<PhaseSourceStatic name="PhaseSourceStatic"/>
+		</ParamRange>
+		<ParamRange name="Link 3" T="DOUBLE" default="0.94708335399627685547" value="0.21889999508857727051">
+			<PhaseSourceStatic name="PhaseSourceStatic"/>
+		</ParamRange>
+		<ParamRange name="Link 4" altName="High" T="DOUBLE" default="0.94708335399627685547" value="0.9470833316445350647">
+			<PhaseSourceStatic name="PhaseSourceStatic"/>
+		</ParamRange>
+	</Params>
+	<CompositionView name="CompositionView">
+		<FoldParams name="FoldParams">
+			<FoldState component="/compositionpropertiesdashboard" folded="0"/>
+		</FoldParams>
+	</CompositionView>
+	<AudioTrack name="AudioTrack">
+		<AudioEffectChain name="AudioEffectChain">
+			<AudioEffect storage="0" name=" EQ" uniqueTypeId="Resolume EQ" uniqueId="1744281063758">
+				<Params name="Params">
+					<Param name="Bypassed" altName="Bypass" T="BOOL" default="0" value="1"/>
+					<ParamRange name="Low" T="DOUBLE" default="0.5" value="0.29270833730697631836">
+						<DurationSource name="DurationSource"/>
+						<PhaseSourceDashboardLink name="PhaseSourceDashboardLink" phase="0.29270833730697631836" linkId="/link2" linkName="Low">
+							<Params name="Params">
+								<Param name="Invert" T="BOOL" default="0" value="1"/>
+							</Params>
+						</PhaseSourceDashboardLink>
+					</ParamRange>
+					<ParamRange name="High" T="DOUBLE" default="0.5" value="0.052916668355464935303">
+						<DurationSource name="DurationSource"/>
+						<PhaseSourceDashboardLink name="PhaseSourceDashboardLink" phase="0.052916668355464935303" linkId="/link4" linkName="High">
+							<Params name="Params">
+								<Param name="Invert" T="BOOL" default="0" value="1"/>
+							</Params>
+						</PhaseSourceDashboardLink>
+					</ParamRange>
+				</Params>
+				<AnimationSettings name="AnimationSettings" uniqueId="1744281063765">
+					<Setting name="Low" flags="9223372036854775810"/>
+					<Setting name="Mid" flags="9223372036854775810"/>
+					<Setting name="High" flags="9223372036854775810"/>
+				</AnimationSettings>
+			</AudioEffect>
+		</AudioEffectChain>
+	</AudioTrack>
+	<VideoTrack name="VideoTrack">
+		<Params name="Params">
+			<ParamRange name="Width" T="DOUBLE" default="1920" value="1024">
+				<PhaseSourceStatic name="PhaseSourceStatic"/>
+			</ParamRange>
+			<ParamRange name="Height" T="DOUBLE" default="1080" value="1024">
+				<PhaseSourceStatic name="PhaseSourceStatic"/>
+			</ParamRange>
+		</Params>
+		<RenderPass name="RenderPassChain">
+			<RenderPass storage="0" name="Transform" type="TransformEffect" uniqueTypeId="17122039101699797593" uniqueId="1744281062860" baseType="Effect">
+				<View name="View" bCanBeDisabled="0" bCanBeRemoved="0"/>
+			</RenderPass>
+		</RenderPass>
+	</VideoTrack>
+	<Layer name="Layer" uniqueId="1744281062937" layerIndex="0">
+		<ClipTransition name="ClipTransition"/>
+		<LayerView name="LayerView" foldedControl="0">
+			<FoldParams name="FoldParams"/>
+		</LayerView>
+		<AudioTrack name="AudioTrack">
+			<AudioEffectChain name="AudioEffectChain"/>
+		</AudioTrack>
+		<VideoTrack name="VideoTrack">
+			<Params name="Params">
+				<ParamRange name="Width" T="DOUBLE" default="1024" value="1024">
+					<PhaseSourceStatic name="PhaseSourceStatic"/>
+				</ParamRange>
+				<ParamRange name="Height" T="DOUBLE" default="1024" value="1024">
+					<PhaseSourceStatic name="PhaseSourceStatic"/>
+				</ParamRange>
+			</Params>
+			<RenderPass name="RenderPassChain">
+				<RenderPass storage="0" name="Transform" type="TransformEffect" uniqueTypeId="17122039101699797593" uniqueId="1744281063051" baseType="Effect">
+					<View name="View" bCanBeDisabled="0" bCanBeRemoved="0"/>
+				</RenderPass>
+			</RenderPass>
+			<ChoosableMixer name="Blend">
+				<VideoMixerStateID uniqueId="1744281063040"/>
+				<RenderPass name="Add" type="Add" uniqueTypeId="A005" uniqueId="1744281063042" baseType="Mixer"/>
+			</ChoosableMixer>
+			<ChoosableMixer name="Transition">
+				<VideoMixerStateID uniqueId="1744281063045"/>
+				<RenderPass name="Alpha" type="Alpha" uniqueTypeId="A006" uniqueId="1744281063047" baseType="Mixer"/>
+			</ChoosableMixer>
+		</VideoTrack>
+	</Layer>
+	<Layer name="Layer" uniqueId="1744281063069" layerIndex="1">
+		<ClipTransition name="ClipTransition"/>
+		<LayerView name="LayerView" foldedControl="0">
+			<FoldParams name="FoldParams"/>
+		</LayerView>
+		<AudioTrack name="AudioTrack">
+			<AudioEffectChain name="AudioEffectChain"/>
+		</AudioTrack>
+		<VideoTrack name="VideoTrack">
+			<Params name="Params">
+				<ParamRange name="Width" T="DOUBLE" default="1024" value="1024">
+					<PhaseSourceStatic name="PhaseSourceStatic"/>
+				</ParamRange>
+				<ParamRange name="Height" T="DOUBLE" default="1024" value="1024">
+					<PhaseSourceStatic name="PhaseSourceStatic"/>
+				</ParamRange>
+			</Params>
+			<RenderPass name="RenderPassChain">
+				<RenderPass storage="0" name="Transform" type="TransformEffect" uniqueTypeId="17122039101699797593" uniqueId="1744281063183" baseType="Effect">
+					<View name="View" bCanBeDisabled="0" bCanBeRemoved="0"/>
+				</RenderPass>
+			</RenderPass>
+			<ChoosableMixer name="Blend">
+				<VideoMixerStateID uniqueId="1744281063172"/>
+				<RenderPass name="Add" type="Add" uniqueTypeId="A005" uniqueId="1744281063174" baseType="Mixer"/>
+			</ChoosableMixer>
+			<ChoosableMixer name="Transition">
+				<VideoMixerStateID uniqueId="1744281063177"/>
+				<RenderPass name="Alpha" type="Alpha" uniqueTypeId="A006" uniqueId="1744281063179" baseType="Mixer"/>
+			</ChoosableMixer>
+		</VideoTrack>
+	</Layer>
+	<Layer name="Layer" uniqueId="1744281063201" layerIndex="2">
+		<ClipTransition name="ClipTransition"/>
+		<LayerView name="LayerView" foldedControl="0">
+			<FoldParams name="FoldParams"/>
+		</LayerView>
+		<AudioTrack name="AudioTrack">
+			<AudioEffectChain name="AudioEffectChain"/>
+		</AudioTrack>
+		<VideoTrack name="VideoTrack">
+			<Params name="Params">
+				<ParamRange name="Width" T="DOUBLE" default="1024" value="1024">
+					<PhaseSourceStatic name="PhaseSourceStatic"/>
+				</ParamRange>
+				<ParamRange name="Height" T="DOUBLE" default="1024" value="1024">
+					<PhaseSourceStatic name="PhaseSourceStatic"/>
+				</ParamRange>
+			</Params>
+			<RenderPass name="RenderPassChain">
+				<RenderPass storage="0" name="Transform" type="TransformEffect" uniqueTypeId="17122039101699797593" uniqueId="1744281063315" baseType="Effect">
+					<View name="View" bCanBeDisabled="0" bCanBeRemoved="0"/>
+				</RenderPass>
+			</RenderPass>
+			<ChoosableMixer name="Blend">
+				<VideoMixerStateID uniqueId="1744281063304"/>
+				<RenderPass name="Add" type="Add" uniqueTypeId="A005" uniqueId="1744281063306" baseType="Mixer">
+					<Params name="Params">
+						<ParamRange name="Opacity" T="DOUBLE" default="1" value="0.5">
+							<PhaseSourceStatic name="PhaseSourceStatic"/>
+						</ParamRange>
+					</Params>
+				</RenderPass>
+			</ChoosableMixer>
+			<ChoosableMixer name="Transition">
+				<VideoMixerStateID uniqueId="1744281063309"/>
+				<RenderPass name="Alpha" type="Alpha" uniqueTypeId="A006" uniqueId="1744281063311" baseType="Mixer"/>
+			</ChoosableMixer>
+		</VideoTrack>
+	</Layer>
+	<CrossFader name="CrossFader">
+		<AudioTrack name="AudioTrack">
+			<AudioEffectChain name="AudioEffectChain"/>
+		</AudioTrack>
+		<VideoTrack name="VideoTrack">
+			<Params name="Params">
+				<ParamRange name="Width" T="DOUBLE" default="1920" value="1920">
+					<PhaseSourceStatic name="PhaseSourceStatic"/>
+				</ParamRange>
+				<ParamRange name="Height" T="DOUBLE" default="1080" value="1080">
+					<PhaseSourceStatic name="PhaseSourceStatic"/>
+				</ParamRange>
+			</Params>
+			<RenderPass name="RenderPassChain"/>
+			<ChoosableMixer name="Blend mode">
+				<VideoMixerStateID uniqueId="1744281062878"/>
+				<RenderPass name="Alpha" type="Alpha" uniqueTypeId="A006" uniqueId="1744281062880" baseType="Mixer"/>
+			</ChoosableMixer>
+		</VideoTrack>
+	</CrossFader>
+	<TempoController name="TempoController"/>
+	<Deck name="Deck" uniqueId="1744281062883" closed="0" numLayersWithContent="3" numColumnsWithContent="1" numLayers="3" numColumns="9" deckIndex="0">
+		<Params name="Params">
+			<Param name="Name" T="STRING" default="empty" value="Downloads"/>
+		</Params>
+		<Column uniqueId="1744281062928" columnIndex="0"/>
+		<Column uniqueId="1744281062929" columnIndex="1"/>
+		<Column uniqueId="1744281062930" columnIndex="2"/>
+		<Column uniqueId="1744281062931" columnIndex="3"/>
+		<Column uniqueId="1744281062932" columnIndex="4"/>
+		<Column uniqueId="1744281062933" columnIndex="5"/>
+		<Column uniqueId="1744281062934" columnIndex="6"/>
+		<Column uniqueId="1744281062935" columnIndex="7"/>
+		<Column uniqueId="1744281062936" columnIndex="8"/>
+		<Clip name="Clip" uniqueId="1744281062901" layerIndex="0" columnIndex="0"/>
+		<Clip name="Clip" uniqueId="1744281062910" layerIndex="1" columnIndex="0"/>
+		<Clip name="Clip" uniqueId="1744281062919" layerIndex="2" columnIndex="0">
+			<PreloadData>
+				<AudioFile value="/Users/jonas/Documents/GitHub/domeconductor/2_DOME_TAKE_5_1024x1024.mp4"/>
+				<VideoFile value="/Users/jonas/Documents/GitHub/domeconductor/2_DOME_TAKE_5_1024x1024.mp4"/>
+			</PreloadData>
+			<Params name="Params">
+				<Param name="Name" T="STRING" default="2_DOME_TAKE_5_1024x1024" value="2_DOME_TAKE_5_1024x1024"/>
+				<ParamChoice name="TransportType" default="0" value="0" storeChoices="0"/>
+			</Params>
+			<Transport name="Transport">
+				<Params name="Params">
+					<ParamRange name="Position" T="DOUBLE" default="0" value="7743.8321995138085185">
+						<DurationSource name="DurationSource" defaultDuration="92.414666666666676065s"/>
+						<PhaseSourceTransportTimeline name="PhaseSourceTransportTimeline" phase="0.083794407087408290247" defaultMillisecondsDuration="92414.666666666671517" defaultBeatsDuration="156">
+							<Params name="Params">
+								<ParamRange name="Max Distance" altName="Distance" T="DOUBLE" default="92.414666666666676065" value="1.999999999999999778">
+									<PhaseSourceStatic name="PhaseSourceStatic"/>
+								</ParamRange>
+								<ParamRange name="BPM" T="DOUBLE" default="101" value="120">
+									<PhaseSourceStatic name="PhaseSourceStatic"/>
+								</ParamRange>
+							</Params>
+							<Beats_d name="Beats_d" numDetectedBeats="306" numManualBeats="128" detectedTempo="101"/>
+						</PhaseSourceTransportTimeline>
+						<ValueRange name="minMax" min="0" max="92414.666666666671517"/>
+					</ParamRange>
+				</Params>
+			</Transport>
+			<ClipView name="ClipView">
+				<FoldParams name="FoldParams"/>
+			</ClipView>
+			<AudioTrack name="AudioTrack">
+				<Params name="Params">
+					<ParamRange name="Volume" T="DOUBLE" default="0" value="-2.8929823996598619986e-15">
+						<PhaseSourceStatic name="PhaseSourceStatic"/>
+					</ParamRange>
+				</Params>
+				<AudioEffectChain name="AudioEffectChain"/>
+				<PrimarySource>
+					<AudioFileSource FileName="/Users/jonas/Documents/GitHub/domeconductor/2_DOME_TAKE_5_1024x1024.mp4"/>
+				</PrimarySource>
+			</AudioTrack>
+			<VideoTrack name="VideoTrack">
+				<Params name="Params">
+					<ParamRange name="Width" T="DOUBLE" default="1022" value="1022">
+						<PhaseSourceStatic name="PhaseSourceStatic"/>
+					</ParamRange>
+					<ParamRange name="Height" T="DOUBLE" default="1024" value="1024">
+						<PhaseSourceStatic name="PhaseSourceStatic"/>
+					</ParamRange>
+					<Param name="RScale" T="BOOL" default="1" value="1"/>
+					<Param name="GScale" T="BOOL" default="1" value="1"/>
+					<Param name="BScale" T="BOOL" default="1" value="1"/>
+					<Param name="AScale" T="BOOL" default="0" value="0"/>
+				</Params>
+				<RenderPass name="RenderPassChain">
+					<RenderPass storage="0" name="Transform" type="TransformEffect" uniqueTypeId="17122039101699797593" uniqueId="1744281063553" baseType="Effect">
+						<View name="View" bCanBeDisabled="0" bCanBeRemoved="0"/>
+					</RenderPass>
+				</RenderPass>
+				<ChoosableMixer name="Blend">
+					<VideoMixerStateID uniqueId="1744281063551"/>
+				</ChoosableMixer>
+				<PrimarySource>
+					<VideoSource name="VideoSource" width="1022" height="1024" type="VideoFormatReaderSource">
+						<VideoFormatReaderSource fileName="/Users/jonas/Documents/GitHub/domeconductor/2_DOME_TAKE_5_1024x1024.mp4"/>
+					</VideoSource>
+				</PrimarySource>
+				<ChoosableMixer name="Blend">
+					<VideoMixerStateID uniqueId="1744281063551"/>
+				</ChoosableMixer>
+			</VideoTrack>
+		</Clip>
+		<Clip name="Clip" uniqueId="1744281062902" layerIndex="0" columnIndex="1"/>
+		<Clip name="Clip" uniqueId="1744281062911" layerIndex="1" columnIndex="1"/>
+		<Clip name="Clip" uniqueId="1744281062920" layerIndex="2" columnIndex="1"/>
+		<Clip name="Clip" uniqueId="1744281062903" layerIndex="0" columnIndex="2"/>
+		<Clip name="Clip" uniqueId="1744281062912" layerIndex="1" columnIndex="2"/>
+		<Clip name="Clip" uniqueId="1744281062921" layerIndex="2" columnIndex="2"/>
+		<Clip name="Clip" uniqueId="1744281062904" layerIndex="0" columnIndex="3"/>
+		<Clip name="Clip" uniqueId="1744281062913" layerIndex="1" columnIndex="3"/>
+		<Clip name="Clip" uniqueId="1744281062922" layerIndex="2" columnIndex="3"/>
+		<Clip name="Clip" uniqueId="1744281062905" layerIndex="0" columnIndex="4"/>
+		<Clip name="Clip" uniqueId="1744281062914" layerIndex="1" columnIndex="4"/>
+		<Clip name="Clip" uniqueId="1744281062923" layerIndex="2" columnIndex="4"/>
+		<Clip name="Clip" uniqueId="1744281062906" layerIndex="0" columnIndex="5"/>
+		<Clip name="Clip" uniqueId="1744281062915" layerIndex="1" columnIndex="5"/>
+		<Clip name="Clip" uniqueId="1744281062924" layerIndex="2" columnIndex="5"/>
+		<Clip name="Clip" uniqueId="1744281062907" layerIndex="0" columnIndex="6"/>
+		<Clip name="Clip" uniqueId="1744281062916" layerIndex="1" columnIndex="6"/>
+		<Clip name="Clip" uniqueId="1744281062925" layerIndex="2" columnIndex="6"/>
+		<Clip name="Clip" uniqueId="1744281062908" layerIndex="0" columnIndex="7"/>
+		<Clip name="Clip" uniqueId="1744281062917" layerIndex="1" columnIndex="7"/>
+		<Clip name="Clip" uniqueId="1744281062926" layerIndex="2" columnIndex="7"/>
+		<Clip name="Clip" uniqueId="1744281062909" layerIndex="0" columnIndex="8"/>
+		<Clip name="Clip" uniqueId="1744281062918" layerIndex="1" columnIndex="8"/>
+		<Clip name="Clip" uniqueId="1744281062927" layerIndex="2" columnIndex="8"/>
+	</Deck>
+	<Deck name="Deck" uniqueId="1744281062889" numLayersWithContent="0" numColumnsWithContent="0" numLayers="0" numColumns="0" closed="0" deckIndex="1"/>
+	<Deck name="Deck" uniqueId="1744281062895" numLayersWithContent="0" numColumnsWithContent="0" numLayers="0" numColumns="0" closed="0" deckIndex="2"/>
+	<Notes name="Notes">
+		<Note text_size_multiplier="2" text_color_index="3" text=""/>
+	</Notes>
+</Composition>
+
