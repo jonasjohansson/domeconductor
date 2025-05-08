@@ -64,16 +64,9 @@
           const pose = poses[0];
 
           const leftWrist = pose.keypoints.find((p) => p.name === "left_wrist");
-          const rightWrist = pose.keypoints.find(
-            (p) => p.name === "right_wrist"
-          );
+          const rightWrist = pose.keypoints.find((p) => p.name === "right_wrist");
 
-          if (
-            leftWrist &&
-            rightWrist &&
-            leftWrist.confidence > 0.1 &&
-            rightWrist.confidence > 0.1
-          ) {
+          if (leftWrist && rightWrist && leftWrist.confidence > 0.1 && rightWrist.confidence > 0.1) {
             const dx = leftWrist.x - rightWrist.x;
             const dy = leftWrist.y - rightWrist.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
