@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Webcam Overlay with 3D Model</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- model-viewer for 3D model -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+    <!-- MediaPipe as global scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/selfie_segmentation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+  </head>
+  <body>
+    <button id="startBtn" onclick="start()">Start</button>
+
+    <!-- Background Video -->
+    <video id="bgVideo" playsinline>
+      <source src="orchestra.mp4" type="video/mp4" />
+    </video>
+
+    <!-- Webcam Canvas -->
+    <canvas id="webcamCanvas"></canvas>
+
+    <!-- 3D Model Viewer -->
+    <model-viewer id="ghostModel" src="maestro.glb" alt="3D model" exposure="1"> </model-viewer>
+
+    <script>
+      const canvasElement = document.getElementById("webcamCanvas");
+      const canvasCtx = canvasElement.getContext("2d");
+      const ghostModel = document.querySelector("#ghostModel");
+
+      const videoElement = document.createElement("video");
+      const bgVideo = document.querySelector("#bgVideo");
+      const startBtn = document.querySelector("#startButton");
+      videoElement.style.display = "none";
+      document.body.appendChild(videoElement);
+
+      const selfieSegmentation = new SelfieSegmentation({
+        locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/${file}`,
+      });
+
+      selfieSegmentation.setOptions({
+        modelSelection: 1,
+      });
+
+      selfieSegmentation.onResults((results) => {
+        canvasElement.width = results.image.width;
+        canvasElement.height = results.image.height;
+
+        canvasCtx.save();
+        canvasCtx.clearRect(0, 0, canvasElement.width, canvasElement.height);
+        canvasCtx.drawImage(results.image, 0, 0, canvasElement.width, canvasElement.height);
+
+        canvasCtx.globalCompositeOperation = "destination-in";
+        canvasCtx.drawImage(results.segmentationMask, 0, 0, canvasElement.width, canvasElement.height);
+        canvasCtx.restore();
+      });
+
+      const camera = new Camera(videoElement, {
+        onFrame: async () => {
+          await selfieSegmentation.send({ image: videoElement });
+        },
+        width: 640,
+        height: 480,
+      });
+
+      camera.start();
+
+      function start() {
+        ghostModel.setAttribute("autoplay", "");
+        void ghostModel.offsetWidth; // trigger reflow
+        bgVideo.play();
+      }
+    </script>
+  </body>
+</html>
